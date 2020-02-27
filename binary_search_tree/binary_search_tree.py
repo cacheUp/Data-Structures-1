@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../queue_and_stack')
-from dll_queue import Queue
-from dll_stack import Stack
+# from dll_queue import Queue
+# from dll_stack import Stack
 
 
 class BinarySearchTree:
@@ -11,17 +11,51 @@ class BinarySearchTree:
         self.right = None
 
     # Insert the given value into the tree
+
     def insert(self, value):
-        pass
+        if value < self.value:
+            if self.left == None:
+                self.left = BinarySearchTree(value)
+                print(self.left)
+                return
+            else:
+                self.left.insert(value)
+        elif value > self.value or value == self.value:
+            if self.right == None:
+                self.right = BinarySearchTree(value)
+                return
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
+
     def contains(self, target):
-        pass
+        if target == self.value:
+            return True
+        if target > self.value:
+            print(self.value, self.right)
+            if self.right == None:
+                return False
+            elif target == self.right.value:
+                return True
+            else:
+                return self.right.contains(target)
+        if target < self.value:
+            if self.left == None:
+                return False
+            elif target == self.left.value:
+                return True
+            else:
+                return self.left.contains(target)
 
     # Return the maximum value found in the tree
+
     def get_max(self):
-        pass
+        if not self.right:
+            return self.value
+        else:
+            return self.right.get_max()
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
@@ -55,3 +89,18 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+bst = BinarySearchTree(5)
+# bst.insert(1)
+# print(bst.right.value)
+
+
+bst.insert(2)
+bst.insert(3)
+bst.insert(7)
+bst.insert(6)
+bst.insert(300)
+print(bst.left.right.value)
+print(bst.right.left.value)
+print(bst.get_max())

@@ -47,10 +47,8 @@ class LRUCache:
             self.dll.add_to_head(value)
             self.storage[key] = self.dll.head
         elif self.limit == len(self.dll):
-            print("hit")
             for v, k in self.storage.items():
                 if k.value == self.dll.tail.value:
-                    print("hit2")
                     self.storage[v] = None
             self.dll.remove_from_tail()
             self.dll.add_to_head(value)
